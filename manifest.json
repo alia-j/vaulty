@@ -1,0 +1,17 @@
+{
+  "short_name": "Vaulty",
+  "name": "Vaulty - Tech Action App",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#f0f4f8",
+  "display": "standalone",
+  "theme_color": "#0056b3",
+  "orientation": "portrait"
+}
