@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaulty - Tech Action App</title>
+    
+    <!-- PWA App Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0056b3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
+        body { 
+            font-family: system-ui, -apple-system, sans-serif; 
+            background: #f0f4f8; 
+            margin: 0; 
+            padding: 15px; 
+            color: #111;
+            font-size: 18px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .container { 
+            max-width: 650px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+        }
+        h1 { 
+            margin-top: 0; 
+            color: #0056b3; 
+            font-size: 32px; 
+            text-align: center; 
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* High-Impact Motivation Banner */
+        .motivation-banner {
+            background: linear-gradient(135deg, #0056b3, #007aff);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+        }
+        .progress-container {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 10px;
+            width: 100%;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: #22c55e;
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        
+        /* Input Form Layout */
+        .form-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 25px; 
+        }
+        label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: -10px;
+        }
+        input, select, button { 
+            padding: 16px; 
+            border-radius: 12px; 
+            border: 2px solid #cbd5e1; 
+            font-size: 18px; 
+            outline: none;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus {
+            border-color: #007aff;
+        }
+        
+        .btn-add { 
+            background: #22c55e; 
+            color: white; 
+            border: none; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
+            width: 100%;
+        }
+        .btn-add:hover { background: #16a34a; }
+
+        .search-box {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+        .search-box:focus { border-color: #007aff; }
+        
+        /* Action-Focused Cards */
+        .grid { display: flex; flex-direction: column; gap: 15px; }
+        .card { 
+            background: white; 
+            border: 3px solid #e2e8f0; 
+            padding: 20px; 
+            border-radius: 18px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            position: relative;
+        }
+        .card.mastered {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tag { 
+            display: inline-block; 
+            background: #e1f0ff; 
+            color: #0056b3; 
+            padding: 6px 12px; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            font-weight: bold; 
+        }
+        .status-badge {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .status-todo { background: #fef3c7; color: #b45309; }
+        .status-done { background: #dcfce7; color: #15803d; }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        
+        /* Big Buttons for Multi-Generational Use */
+        .actions { display: flex; gap: 10px; }
+        .btn-action { 
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-watch { 
+            flex: 2;
+            background: #007aff; 
+            color: white; 
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-watch:hover { background: #0056b3; }
+        
+        .btn-toggle {
+            flex: 2;
+            background: #cbd5e1;
+            color: #334155;
+        }
+        .card.mastered .btn-toggle {
+            background: #22c55e;
+            color: white;
+        }
+        
+        .btn-delete { 
+            flex: 1;
+            background: #ef4444; 
+            color: white;
+        }
+        .btn-delete:hover { background: #dc2626; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>⚡ Vaulty</h1>
+    <p class="subtitle">Turn social media scrolls into real-world skills!</p>
+    
+    <!-- Interactive Motivation Counter -->
+    <div class="motivation-banner" id="motivationBanner">
+        <div id="motivationText">🎯 Ready to turn knowledge into action? Save your first tech trick!</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+    
+    <!-- Easy Form -->
+    <div class="form-group">
+        <label for="reelLink">🔗 Paste Video Link:</label>
+        <input type="text" id="reelLink" placeholder="Paste Instagram, YouTube, or web link...">
+        
+        <label for="reelNote">📝 Title / Skill To Master:</label>
+        <input type="text" id="reelNote" placeholder="e.g., Build a personal website in 10 minutes">
+        
+        <label for="reelCategory">📁 Category:</label>
+        <select id="reelCategory">
+            <option value="🤖 AI & Smart Tools">🤖 AI & Smart Tools</option>
+            <option value="📊 Useful Tech Tips">📊 Useful Tech Tips</option>
+            <option value="👶 Fun & Kids Learning">👶 Fun & Kids Learning</option>
+            <option value="🧓 Senior Safe Tech">🧓 Senior Safe Tech</option>
+        </select>
+        
+        <button class="btn-add" onclick="saveReel()">💾 Save to Vault</button>
+    </div>
+
+    <input type="text" id="searchBox" class="search-box" onkeyup="filterReels()" placeholder="🔍 Search through your saved tech skills...">
+
+    <!-- Display Dashboard -->
+    <div class="grid" id="reelsGrid"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", displayReels);
+
+    function saveReel() {
+        const link = document.getElementById('reelLink').value.trim();
+        const note = document.getElementById('reelNote').value.trim();
+        const category = document.getElementById('reelCategory').value;
+
+        if (!link) { alert('Please paste a link first!'); return; }
+
+        const newReel = { 
+            id: Date.now(), 
+            link, 
+            note: note || "Useful Tech Video", 
+            category,
+            status: 'todo'
+        };
+        
+        let currentList = JSON.parse(localStorage.getItem('techReels')) || [];
+        currentList.unshift(newReel); 
+        localStorage.setItem('techReels', JSON.stringify(currentList));
+
+        document.getElementById('reelLink').value = '';
+        document.getElementById('reelNote').value = '';
+        
+        displayReels();
+    }
+
+    function displayReels() {
+        const grid = document.getElementById('reelsGrid');
+        grid.innerHTML = '';
+        const currentList = JSON.parse(localStorage.getItem('techReels')) || [];
+
+        updateMotivationStats(currentList);
+
+        if (currentList.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; color:#666;">Your vault is empty. Save a tech skill above to start!</p>';
+            return;
+        }
+
+        currentList.forEach(item => {
+            const isMastered = item.status === 'mastered';
+            const card = document.createElement('div');
+            card.className = `card ${isMastered ? 'mastered' : ''}`;
+            
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="tag">${item.category}</span>
+                    <span class="status-badge ${isMastered ? 'status-done' : 'status-todo'}">
+                        ${isMastered ? '🟢 Mastered!' : '🟡 To Try'}
+                    </span>
+                </div>
+                <div class="card-title">${item.note}</div>
+                <div class="actions">
+                    <button class="btn-action btn-watch" onclick="window.open('${item.link}', '_blank')">▶ Watch</button>
+                    <button class="btn-action btn-toggle" onclick="toggleStatus(${item.id})">
+                        ${isMastered ? '🔄 Undo' : '✅ Put in Action'}
+                    </button>
+                    <button class="btn-action btn-delete" onclick="deleteReel(${item.id})">🗑️</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function toggleStatus(id) {
+        let currentList = JSON.parse(localStorage.getItem('techReels')) || [];
+        currentList = currentList.map(item => {
+            if (item.id === id) {
+                item.status = item.status === 'mastered' ? 'todo' : 'mastered';
+            }
+            return item;
+        });
+        localStorage.setItem('techReels', JSON.stringify(currentList));
+        displayReels();
+    }
+
+    function deleteReel(id) {
+        if(confirm("Delete this link from your vault?")) {
+            let currentList = JSON.parse(localStorage.getItem('techReels')) || [];
+            currentList = currentList.filter(item => item.id !== id);
+            localStorage.setItem('techReels', JSON.stringify(currentList));
+            displayReels();
+        }
+    }
+
+    function updateMotivationStats(list) {
+        const total = list.length;
+        const mastered = list.filter(item => item.status === 'mastered').length;
+        const textElement = document.getElementById('motivationText');
+        const bar = document.getElementById('progressBar');
+
+        if (total === 0) {
+            textElement.innerHTML = `🎯 Ready to turn knowledge into action? Save your first tech trick!`;
+            bar.style.width = "0%";
+            return;
+        }
+
+        const percentage = Math.round((mastered / total) * 100);
+        bar.style.width = `${percentage}%`;
+
+        if (mastered === 0) {
+            textElement.innerHTML = `🚀 You have ${total} saved tech skills. Pick one and put it to work!`;
+        } else if (percentage === 100) {
+            textElement.innerHTML = `🔥 Flawless Victory! You have applied 100% of your saved skills! 🎉`;
+        } else {
+            textElement.innerHTML = `💪 Action Mode: You've mastered ${mastered} out of ${total} skills (${percentage}%)!`;
+        }
+    }
+
+    function filterReels() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const cards = document.getElementsByClassName('card');
+        
+        for (let i = 0; i < cards.length; i++) {
+            const title = cards[i].getElementsByClassName('card-title')[0].innerText.toLowerCase();
+            const tag = cards[i].getElementsByClassName('tag')[0].innerText.toLowerCase();
+            
+            if (title.includes(query) || tag.includes(query)) {
+                cards[i].style.display = "flex";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
