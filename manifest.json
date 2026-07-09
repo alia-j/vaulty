@@ -1,17 +1,21 @@
 {
   "short_name": "Vaulty",
-  "name": "Vaulty - Tech Action App",
+  "name": "Vaulty - Smart Link Organizer",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/5968/5968756.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/5968/5968756.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "index.html",
-  "background_color": "#f0f4f8",
+  "start_url": "./index.html",
+  "background_color": "#f1f5f9",
+  "theme_color": "#2563eb",
   "display": "standalone",
-  "theme_color": "#0056b3",
   "orientation": "portrait"
 }
