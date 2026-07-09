@@ -3,12 +3,12 @@
   "name": "Vaulty - Smart Link Organizer",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/5968/5968756.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/5968/5968756.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
